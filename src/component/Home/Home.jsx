@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react'
+import Post from '../Post/Post'
 import axios from 'axios';
+import './Home.css';
 
-export default function Post() {
-    const [error,setError] = useState(null);
+export default function Home() {
+  const [error,setError] = useState(null);
     const [isLoaded,setIsLoaded] = useState(false);
     const [postList,setPostList] = useState([]);
 
     
     useEffect(() => {
-        axios.get("http://localhost:8080/posts")
+        axios.get("/posts")
           .then(response => {
             setPostList(response.data);
             setIsLoaded(true);
@@ -25,13 +27,12 @@ export default function Post() {
         return <div> Loading...</div>
     }else{
         return (
-            <ul>
-                {postList.map(post => (
-                    <li key={post.id}>
-                        {post.title} {post.text}
-                    </li>
+          <div className='container'>
+          Home!!!
+            {postList.map(post => (
+              <Post title = {post.title} text= {post.text}></Post>
                 ))}
-            </ul>
-        )
+          </div>
+        )      
     }
 }
