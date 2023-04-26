@@ -3,7 +3,6 @@ import './Post.css'
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
@@ -12,11 +11,9 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-
-
+import { Link } from 'react-router-dom';
+import CommentIcon from '@mui/icons-material/Comment';
 
 
 
@@ -34,30 +31,29 @@ export default function Post({ title, text }) {
         }),
     }));
 
+
+
     const [expanded, setExpanded] = React.useState(false);
+    const userId = 15;
+    const userName = "Fırat";
 
     const handleExpandClick = () => {
-      setExpanded(!expanded);
+
+        setExpanded(!expanded);
     };
 
     return (
-        <div className='postContainer'>
-            <Card sx={{ maxWidth: 345 }}>
+        <div>
+            <Card className='root'>
                 <CardHeader
                     avatar={
-                        <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                            R
-                        </Avatar>
+                        <Link className = 'link'  to={`/users/${userId}`}>
+                            <Avatar className='avatar' sx={{ bgcolor: red[500] }} aria-label="recipe">
+                                {userName.charAt(0).toUpperCase()}
+                            </Avatar>
+                        </Link>
                     }
-                   
                     title={title}
-                    subheader="September 14, 2016"
-                />
-                <CardMedia
-                    component="img"
-                    height="194"
-                    image="/static/images/cards/paella.jpg"
-                    alt="Paella dish"
                 />
                 <CardContent>
                     <Typography variant="body2" color="text.secondary">
@@ -68,16 +64,14 @@ export default function Post({ title, text }) {
                     <IconButton aria-label="add to favorites">
                         <FavoriteIcon />
                     </IconButton>
-                    <IconButton aria-label="share">
-                        <ShareIcon />
-                    </IconButton>
+
                     <ExpandMore
-                        expand={expanded}
+                        className={expanded?"expand":"notExpand"}
                         onClick={handleExpandClick}
                         aria-expanded={expanded}
                         aria-label="show more"
                     >
-                        <ExpandMoreIcon />
+                        <CommentIcon/>
                     </ExpandMore>
                 </CardActions>
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
@@ -110,7 +104,6 @@ export default function Post({ title, text }) {
                     </CardContent>
                 </Collapse>
             </Card>
-            {title}:{text}
         </div>
     )
 }

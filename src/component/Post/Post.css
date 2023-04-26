@@ -1,5 +1,26 @@
-.postContainer{
-    border: 2px;
-    border-color: black;
-    border-style: solid;
+.root{
+    width: 800px;
+    text-align: left;
+    margin: 20px;
 }
+.link{
+    text-decoration: none;
+    box-shadow: none;
+    color: white;
+}
+.avatar{
+    background: 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)',
+    
+}
+.expand{
+    transform: rotate(180deg);
+    margin-left: auto;
+    color: red;
+}
+.notExpand{
+    transform : rotate(0deg);
+    margin-left: auto;
+    color: blue;
+
+}
+
